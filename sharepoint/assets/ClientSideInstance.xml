@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="ReactApplication"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="078313e1-11e1-421f-b9a4-561d6cd38853"
+        Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </ClientSideComponentInstance>
+</Elements>

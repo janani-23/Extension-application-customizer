@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://sachagroup.sharepoint.com/sites/CInterns/Lists/newlist/AllItems.aspx",
+      "customActions": {
+        "078313e1-11e1-421f-b9a4-561d6cd38853": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "Top": "Header of the page",  
+            "Bottom": "Footer of the page"  
+          }
+        }
+      }
+    },
+    "reactApplication": {
+      "pageUrl": "https://sachagroup.sharepoint.com/sites/CInterns/Lists/newlist/AllItems.aspx",
+      "customActions": {
+        "078313e1-11e1-421f-b9a4-561d6cd38853": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "Top": "Header of the page",  
+            "Bottom": "Footer of the page"  
+          }
+        }
+      }
+    }
+  }
+}
