@@ -201,26 +201,3 @@ public static createList(context: IWebPartContext,
       });
 }
 }
-
-
- // private _renderPlaceHolders(): void {  
-  //   console.log('Available placeholders: ',  
-  //   this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', ')); 
-  //  // this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', '));  
-       
-  //   // Handling the bottom placeholder  
-  //   if (!this._bottomPlaceholder) {  
-  //     this._bottomPlaceholder =  
-  //       this.context.placeholderProvider.tryCreateContent(  
-  //         PlaceholderName.Bottom,  
-  //         { onDispose: this._onDispose });  
-      
-  //     // The extension should not assume that the expected placeholder is available.  
-  //     if (!this._bottomPlaceholder) {  
-  //       console.error('The expected placeholder (Bottom) was not found.');  
-  //       return;  
-  //     }  
-  //     const elem: React.ReactElement<IReactFooterProps> = React.createElement(  Footer);  
-  //     ReactDOM.render(elem, this._bottomPlaceholder.domElement);      
-  //   }  
-  // }  
