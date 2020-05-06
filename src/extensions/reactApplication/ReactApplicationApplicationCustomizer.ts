@@ -1,43 +1,23 @@
-//import * as React from "react";  
-//import * as ReactDOM from "react-dom";  
-//import Footer, { IReactFooterProps } from '../Footer';
 import { IWebPartContext } from '@microsoft/sp-webpart-base';
-//Import SPHttpClient
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-import { SPPermission } from '@microsoft/sp-page-context';
-
 import { override } from '@microsoft/decorators';
-import { Log } from '@microsoft/sp-core-library';
 import {
   BaseApplicationCustomizer,
   PlaceholderContent,  
   PlaceholderName 
 } from '@microsoft/sp-application-base';
-//import { Dialog } from '@microsoft/sp-dialog';
+
 import styles from '../AppCustomizer.module.scss';  
 import { escape } from '@microsoft/sp-lodash-subset';
-//CustomHeaderFooterApplicationCustomizer.module.scss
-
-import * as strings from 'ReactApplicationApplicationCustomizerStrings';
-// import * as $ from 'jquery';
- import pnp from 'sp-pnp-js';
+import pnp from 'sp-pnp-js';
 
   const LOG_SOURCE: string = 'ReactApplicationApplicationCustomizer';
 
-/** 
- * If your command set uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
-
 export interface IReactApplicationApplicationCustomizerProperties {
   
-   Top: string;
+    Top: string;
     Bottom: string;
-    Title:string;
-  //testMessage: string; 
-  
-}
+  }
 
 /** A Custom Action which can be run during execution of a Client Side Application */
 export default class ReactApplicationApplicationCustomizer
@@ -46,7 +26,6 @@ export default class ReactApplicationApplicationCustomizer
     private _topPlaceholder: PlaceholderContent | undefined;
   @override
   public onInit(): Promise<void> {
-    //Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
     pnp.setup({  
       spfxContext: this.context  
   }); 
@@ -65,18 +44,12 @@ export default class ReactApplicationApplicationCustomizer
 
     this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
     this._renderPlaceHolders(); 
-     
-    //this.createList();
-    
-  
-    
     return Promise.resolve();
-  } 
+  }
+  
+  
   private _renderPlaceHolders(): void {  
-    // console.log('HelloWorldApplicationCustomizer._renderPlaceHolders()');  
-    // console.log('Available placeholders: ',  
-    // this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', '));  
-      
+    
     // Handling the top placeholder  
     if (!this._topPlaceholder) {  
       this._topPlaceholder =  
@@ -103,8 +76,8 @@ export default class ReactApplicationApplicationCustomizer
             <div class="${styles.app}">  
               <div class="ms-bgColor-themeDark ms-fontColor-white ${styles.top}">  
                  ${escape(topString)}  
-              </div> <br>
-               <input type="text" name="name" value="name" > 
+              </div> 
+              <h2>Notification </h2>
             </div>`;  
         }  
 
@@ -141,8 +114,7 @@ export default class ReactApplicationApplicationCustomizer
     }  
  }  
  
-
-  private _onDispose(): void {  
+ private _onDispose(): void {  
     console.log('[ReactHeaderFooterApplicationCustomizer._onDispose] Disposed custom top and bottom placeholders.');  
 } 
 public static checkListExists(context: IWebPartContext, listTitle: string): Promise<boolean> {
