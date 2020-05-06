@@ -34,7 +34,8 @@ export interface IReactApplicationApplicationCustomizerProperties {
   
    Top: string;
     Bottom: string;
-  testMessage: string; 
+    Title:string;
+  //testMessage: string; 
   
 }
 
@@ -49,43 +50,40 @@ export default class ReactApplicationApplicationCustomizer
     pnp.setup({  
       spfxContext: this.context  
   }); 
-  pnp.sp.web.lists.getByTitle("newlist").items.select("Title", "ID").expand("ID").getPaged().then(p => {  
-    console.log(JSON.stringify(p.results, null, 4));  
+  pnp.sp.web.lists.getByTitle("newlist").items.select("Title", "ID").getPaged().then(p => {  
+    console.log(JSON.stringify(p.results));  
     var itemColl = p.results;  
     for (var index = 0; index < itemColl.length; index++) {  
         var element = itemColl[index];  
         var title = element["Title"];  
         var id = element["ID"];  
-        // var customFldValue = element["MyCustomFld"];  
-        // var lookUpFld = element["MyLookUpFld"];  
-        // var lookUpFldId = lookUpFld["ID"];  
-        console.log("Item with Id: " + id + " and title: " + title  );  
+        console.log("Item  Id: " + id + " and title: " + title  );  
         
     }  
 }); 
+     
 
     this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
-    this._renderPlaceHolders();  
+    this._renderPlaceHolders(); 
+     
+    //this.createList();
     
   
-    // let message: string = this.properties.testMessage;
-    // if (!message) {
-    //   message = '(No properties were provided.)';
-    // }
-    // Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);
-
+    
     return Promise.resolve();
   } 
   private _renderPlaceHolders(): void {  
-    console.log('HelloWorldApplicationCustomizer._renderPlaceHolders()');  
-    console.log('Available placeholders: ',  
-    this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', '));  
+    // console.log('HelloWorldApplicationCustomizer._renderPlaceHolders()');  
+    // console.log('Available placeholders: ',  
+    // this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', '));  
       
     // Handling the top placeholder  
     if (!this._topPlaceholder) {  
       this._topPlaceholder =  
         this.context.placeholderProvider.tryCreateContent(  
-          PlaceholderName.Top,  
+          PlaceholderName.Top,
+         
+
           { onDispose: this._onDispose });  
       
       // The extension should not assume that the expected placeholder is available.  
@@ -105,9 +103,11 @@ export default class ReactApplicationApplicationCustomizer
             <div class="${styles.app}">  
               <div class="ms-bgColor-themeDark ms-fontColor-white ${styles.top}">  
                  ${escape(topString)}  
-              </div>  
+              </div> <br>
+               <input type="text" name="name" value="name" > 
             </div>`;  
         }  
+
       }  
     }  
      // Handling the bottom placeholder  
@@ -145,6 +145,20 @@ export default class ReactApplicationApplicationCustomizer
   private _onDispose(): void {  
     console.log('[ReactHeaderFooterApplicationCustomizer._onDispose] Disposed custom top and bottom placeholders.');  
 } 
+public static checkListExists(context: IWebPartContext, listTitle: string): Promise<boolean> {
+  return context.spHttpClient.get(context.pageContext.web.absoluteUrl
+      + "/_api/web/lists/GetByTitle('"
+      + listTitle
+      + "')?$select=Title", SPHttpClient.configurations.v1)
+      .then((response: SPHttpClientResponse) => {
+          if (response.status === 404) {
+              return false;
+          }
+          else {
+              return true;
+          }
+      });
+}
 public static createList(context: IWebPartContext,
   listTitle: string,
   listDescription: string,
